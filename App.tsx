@@ -148,23 +148,17 @@ const App: React.FC = () => {
                     </div>
                   </div>
                 </div>
-
-                <button 
-                  onClick={() => window.location.href = window.location.pathname}
-                  className="w-full py-4 bg-slate-900 text-white rounded-2xl font-bold hover:bg-slate-800 transition-all active:scale-95"
-                >
-                  Bosh sahifaga qaytish
-                </button>
+                
+                <div className="pt-4 text-center border-t border-slate-100">
+                   <p className="text-xs text-slate-400 italic">JizzPI Axborot Resurs Markazi tomonidan tasdiqlangan elektron hujjat.</p>
+                </div>
               </div>
             ) : (
               <div className="text-center space-y-6">
-                <p className="text-slate-500">Kechirasiz, ushbu ID bilan bog'liq ma'lumot topilmadi yoki hujjat bekor qilingan.</p>
-                <button 
-                  onClick={() => window.location.href = window.location.pathname}
-                  className="w-full py-4 bg-red-600 text-white rounded-2xl font-bold hover:bg-red-700 transition-all active:scale-95"
-                >
-                  Qayta urinish
-                </button>
+                <p className="text-slate-500 font-medium">Kechirasiz, ushbu ID bilan bog'liq ma'lumot topilmadi yoki hujjat bekor qilingan.</p>
+                <div className="p-4 bg-red-50 rounded-xl border border-red-100 text-red-600 text-sm">
+                  Tizimda bunday ariza mavjud emas.
+                </div>
               </div>
             )}
           </div>

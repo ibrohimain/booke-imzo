@@ -63,7 +63,7 @@ export const DocumentTemplate: React.FC<DocumentTemplateProps> = ({ type, submis
               <tr className="bg-gray-50 h-14">
                 <th className="border-[1.5pt] border-black p-2 text-center w-10">№</th>
                 <th className="border-[1.5pt] border-black p-2 text-center w-1/3">Muallifi (lar)</th>
-                <th className="border-[1.5pt] border-black p-2 text-center">Adabiyotning nomi va turi (nashr yili)</th>
+                <th className="border-[1.5pt] border-black p-2 text-center">Adabiyotning nomi va turi</th>
                 <th className="border-[1.5pt] border-black p-2 text-center w-32">ISBN kodi</th>
               </tr>
             </thead>
@@ -96,14 +96,14 @@ export const DocumentTemplate: React.FC<DocumentTemplateProps> = ({ type, submis
               <span className="font-bold">Topshirdi: </span>
               <div className="flex justify-between items-end border-b border-black pb-1">
                 <span className="uppercase font-bold text-[11pt]">{submission.fullName}</span>
-                <span className="text-[9pt] italic">(imzo)</span>
+                <span className="text-[9pt] italic">/ imzo /</span>
               </div>
             </div>
             <div className="flex flex-col">
               <span className="font-bold">Qabul qildi: </span>
               <div className="flex justify-between items-end border-b border-black pb-1">
-                <span className="text-[11pt]">JizPi ARM elektron axborot resurs bo'limi boshligi: Abdullayev.I</span>
-                <span className="text-[9pt] italic">(imzo)</span>
+                <span className="text-[11pt]">ARM xodimi</span>
+                <span className="text-[9pt] italic">/ imzo /</span>
               </div>
             </div>
           </div>
