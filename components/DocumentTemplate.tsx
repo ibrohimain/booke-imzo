@@ -157,6 +157,13 @@ export const DocumentTemplate: React.FC<DocumentTemplateProps> = ({ type, submis
           Mazkur adabiyotlardan talabalar, tadqiqotchilar, professor-o’qituvchilar va 
           boshqa xodimlarning bepul foydalanishiga, o'quv va ilmiy maqsadlarda yuklab olishlariga hech qanday e'tirozim yo'q.
         </p>
+
+        <div className="indent-12 italic border-l-4 border-black pl-6 bg-gray-50 py-4 mt-4 rounded-r-lg">
+          <p className="text-[10pt]">
+            <span className="font-bold">Eslatma:</span> Mazkur rozilik xati mualliflik ob’yektiga nisbatan mulkiy huquqlarni o’zga shaxslarga 
+            berishni anglatmaydi va faqatgina muassasa ta'lim jarayonlari samaradorligini oshirish maqsadida foydalanish uchun mo'ljallangan.
+          </p>
+        </div>
       </div>
 
       <div className="mt-8 flex justify-between items-center gap-10">
