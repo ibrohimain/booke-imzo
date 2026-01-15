@@ -11,14 +11,16 @@ interface DocumentTemplateProps {
 export const DocumentTemplate: React.FC<DocumentTemplateProps> = ({ type, submission }) => {
   const [qrDataUrl, setQrDataUrl] = useState<string>('');
   
-  const currentYear = new Date().getFullYear();
-  const currentDay = new Date().getDate().toString().padStart(2, '0');
-  const currentMonthName = new Intl.DateTimeFormat('uz-UZ', { month: 'long' }).format(new Date());
+  // SubmissionDate dan foydalanish (YYYY-MM-DD formatida keladi)
+  const dateObj = submission.submissionDate ? new Date(submission.submissionDate) : new Date();
+  const currentYear = dateObj.getFullYear();
+  const currentDay = dateObj.getDate().toString().padStart(2, '0');
+  const currentMonthName = new Intl.DateTimeFormat('uz-UZ', { month: 'long' }).format(dateObj);
+  const formattedDateString = `${currentDay}.${(dateObj.getMonth() + 1).toString().padStart(2, '0')}.${currentYear}`;
 
   useEffect(() => {
     const generateQR = async () => {
       try {
-        // Tekshirish URL ini yaratish
         const verifyUrl = `${window.location.origin}${window.location.pathname}?verify=${submission.id}`;
         const url = await QRCode.toDataURL(verifyUrl, {
           margin: 1,
@@ -36,7 +38,6 @@ export const DocumentTemplate: React.FC<DocumentTemplateProps> = ({ type, submis
     generateQR();
   }, [submission.id]);
   
-  // Ma'lumotnoma Dizayni (Faqat 12pt, 1 sahifa)
   if (type === 'ref') {
     return (
       <div className="font-times w-[210mm] h-[297mm] mx-auto bg-white text-black p-[15mm_20mm] box-border overflow-hidden flex flex-col text-[12pt]">
@@ -121,14 +122,14 @@ export const DocumentTemplate: React.FC<DocumentTemplateProps> = ({ type, submis
     );
   }
 
-  // Rozilik Xati Dizayni
-  const fontSizeClass = submission.books.length > 3 ? "text-[11pt]" : "text-[12pt]";
-  const lineHeightClass = submission.books.length > 4 ? "leading-[1.5]" : "leading-[1.8]";
+  const isLongText = submission.books.length > 3 || submission.fullName.length > 25;
+  const fontSizeClass = isLongText ? "text-[11pt]" : "text-[12pt]";
+  const lineHeightClass = isLongText ? "leading-[1.5]" : "leading-[1.8]";
 
   return (
     <div className={`font-times w-[210mm] h-[297mm] mx-auto bg-white text-black p-[25mm_30mm] box-border overflow-hidden flex flex-col ${fontSizeClass}`}>
-      <div className="flex flex-col items-end mb-12 text-right w-full">
-        <div className="max-w-[450px] space-y-2">
+      <div className="flex flex-col items-end mb-10 text-right w-full">
+        <div className="max-w-[450px] space-y-1">
           <p className="font-bold text-[14pt] uppercase border-b-2 border-black pb-1 inline-block">
             {submission.fullName}
           </p>
@@ -138,11 +139,11 @@ export const DocumentTemplate: React.FC<DocumentTemplateProps> = ({ type, submis
         </div>
       </div>
 
-      <div className="text-center mb-12">
+      <div className="text-center mb-10">
         <h1 className="text-[28pt] font-bold uppercase tracking-[12px] border-b-4 border-double border-black inline-block px-16 pb-2">ROZILIK XATI</h1>
       </div>
 
-      <div className={`flex-grow space-y-8 text-justify ${lineHeightClass}`}>
+      <div className={`flex-grow space-y-6 text-justify ${lineHeightClass}`}>
         <p className="indent-12">
           Men, <span className="font-bold underline">{submission.fullName}</span>, quyidagi elektron adabiyotlarim: 
           {submission.books.map((b, i) => (
@@ -169,12 +170,12 @@ export const DocumentTemplate: React.FC<DocumentTemplateProps> = ({ type, submis
       <div className="mt-8 flex justify-between items-center gap-10">
         <div className="flex-1 flex flex-col items-center p-3 border-2 border-dashed border-slate-300 rounded-2xl">
           {qrDataUrl && <img src={qrDataUrl} alt="QR Code" className="w-28 h-28 mb-2" />}
-          <p className="text-[9pt] font-black uppercase text-slate-500">Elektron Imzo</p>
+          <p className="text-[9pt] font-black uppercase text-slate-500 tracking-tight text-center">Elektron Imzo & ID</p>
         </div>
 
         <div className="flex-1 space-y-8">
           <div className="text-[13pt] font-bold">
-            Sana: {currentDay}.{new Date().getMonth()+1 < 10 ? '0'+(new Date().getMonth()+1) : new Date().getMonth()+1}.{currentYear} y.
+            Sana: {formattedDateString} y.
           </div>
           <div className="text-center flex flex-col items-center">
             <div className="w-full border-b-2 border-black mb-2 flex justify-between items-end h-10">
@@ -186,7 +187,7 @@ export const DocumentTemplate: React.FC<DocumentTemplateProps> = ({ type, submis
         </div>
       </div>
       
-      <div className="mt-12 text-center text-[9pt] text-gray-400 italic">
+      <div className="mt-8 text-center text-[9pt] text-gray-400 italic">
         JizzPI ARM elektron tizimi orqali tasdiqlandi. Verification ID: {submission.id}
       </div>
     </div>

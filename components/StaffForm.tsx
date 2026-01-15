@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { BookItem, BookSubmission } from '../types';
 import { 
   Send, Plus, Trash2, BookPlus, User, ChevronRight, 
-  ChevronLeft, CheckCircle2, Info, Building2, UserCircle2
+  ChevronLeft, CheckCircle2, Info, Building2, UserCircle2, Calendar
 } from 'lucide-react';
 
 interface StaffFormProps {
@@ -32,13 +32,16 @@ export const StaffForm: React.FC<StaffFormProps> = ({ onSubmit }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isOtherDept, setIsOtherDept] = useState(false);
   
+  const today = new Date().toISOString().split('T')[0];
+
   const [personalInfo, setPersonalInfo] = useState({
     fullName: '',
     isExternal: false,
     institution: 'Jizzax Politexnika Instituti',
     department: '',
     otherDepartment: '',
-    position: ''
+    position: '',
+    submissionDate: today
   });
 
   const [books, setBooks] = useState<BookItem[]>([
@@ -47,7 +50,7 @@ export const StaffForm: React.FC<StaffFormProps> = ({ onSubmit }) => {
 
   const validateStep1 = () => {
     const dept = personalInfo.isExternal ? personalInfo.department : (isOtherDept ? personalInfo.otherDepartment : personalInfo.department);
-    return personalInfo.fullName && dept && personalInfo.position && personalInfo.institution;
+    return personalInfo.fullName && dept && personalInfo.position && personalInfo.institution && personalInfo.submissionDate;
   };
 
   const addBookRow = () => {
@@ -77,6 +80,7 @@ export const StaffForm: React.FC<StaffFormProps> = ({ onSubmit }) => {
       institution: personalInfo.institution,
       department: personalInfo.isExternal ? personalInfo.department : (isOtherDept ? personalInfo.otherDepartment : personalInfo.department),
       position: personalInfo.position,
+      submissionDate: personalInfo.submissionDate,
       books: books
     };
     
@@ -88,7 +92,8 @@ export const StaffForm: React.FC<StaffFormProps> = ({ onSubmit }) => {
         institution: 'Jizzax Politexnika Instituti', 
         department: '', 
         otherDepartment: '', 
-        position: '' 
+        position: '',
+        submissionDate: today
       });
       setBooks([{ title: '', type: 'Darslik', authors: '', quantity: 1, publishedYear: new Date().getFullYear(), isbn: '' }]);
       setIsOtherDept(false);
@@ -124,7 +129,6 @@ export const StaffForm: React.FC<StaffFormProps> = ({ onSubmit }) => {
                 <h2 className="text-xl font-bold text-slate-800">Shaxsiy ma'lumotlar</h2>
               </div>
               
-              {/* Foydalanuvchi turi selektori */}
               <div className="flex bg-slate-100 p-1 rounded-xl">
                 <button 
                   type="button"
@@ -157,6 +161,20 @@ export const StaffForm: React.FC<StaffFormProps> = ({ onSubmit }) => {
               </div>
               
               <div className="space-y-2">
+                <label className="block text-sm font-semibold text-slate-600">Topshirish sanasi</label>
+                <div className="relative">
+                  <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 pointer-events-none" />
+                  <input 
+                    required 
+                    type="date" 
+                    value={personalInfo.submissionDate} 
+                    onChange={e => setPersonalInfo({...personalInfo, submissionDate: e.target.value})} 
+                    className="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-300 focus:ring-4 focus:ring-blue-100 focus:border-blue-500 outline-none transition-all" 
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
                 <label className="block text-sm font-semibold text-slate-600">Lavozimingiz / Unvoningiz</label>
                 <input 
                   required 
@@ -181,7 +199,7 @@ export const StaffForm: React.FC<StaffFormProps> = ({ onSubmit }) => {
                       placeholder="Masalan: Toshkent Davlat Texnika Universiteti" 
                     />
                   </div>
-                  <div className="space-y-2">
+                  <div className="space-y-2 md:col-span-2">
                     <label className="block text-sm font-semibold text-slate-600">Kafedra / Bo'lim</label>
                     <input 
                       required 
