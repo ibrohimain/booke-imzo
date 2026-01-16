@@ -24,7 +24,7 @@ const DEPARTMENTS = [
 const BOOK_TYPES = [
   "Darslik", "Uslubiy ko'rsatma", "O'quv qo'llanma", "Badiiy adabiyot", "Uslubiy qo'llanma",
   "Lug'atlar", "Ma'lumotnomalar", "Ma'ruzalar to'plami", "O'quv-uslubiy majmua",
-  "Ilmiy maqola", "Ilmiy tezis", "PhD dissertatsiya", "DSc dissertatsiya", "Monografiya", "Boshqa"
+  "Ilmiy maqola", "Ilmiy tezis", "Jurnal","PhD dissertatsiya", "DSc dissertatsiya", "MSc dissertatsiya", "PhD avtoreferat","DSc avtoreferat","Monografiya", "Boshqa"
 ];
 
 export const StaffForm: React.FC<StaffFormProps> = ({ onSubmit }) => {
