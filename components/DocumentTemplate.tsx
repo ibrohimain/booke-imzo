@@ -64,7 +64,7 @@ export const DocumentTemplate: React.FC<DocumentTemplateProps> = ({ type, submis
               <tr className="bg-gray-50 h-14">
                 <th className="border-[1.5pt] border-black p-2 text-center w-10">№</th>
                 <th className="border-[1.5pt] border-black p-2 text-center w-1/3">Muallifi (lar)</th>
-                <th className="border-[1.5pt] border-black p-2 text-center">Adabiyotning nomi va turi</th>
+                <th className="border-[1.5pt] border-black p-2 text-center">Adabiyotning nomi turi va nashr yili</th>
                 <th className="border-[1.5pt] border-black p-2 text-center w-32">ISBN kodi</th>
               </tr>
             </thead>
@@ -103,7 +103,7 @@ export const DocumentTemplate: React.FC<DocumentTemplateProps> = ({ type, submis
             <div className="flex flex-col">
               <span className="font-bold">Qabul qildi: </span>
               <div className="flex justify-between items-end border-b border-black pb-1">
-                <span className="text-[11pt]">ARM xodimi</span>
+                <span className="text-[11pt]">ARM Rlektron axborot resurslari bo'limi boshlig'i Abdullayev Ibroxim</span>
                 <span className="text-[9pt] italic">/ imzo /</span>
               </div>
             </div>
@@ -134,7 +134,7 @@ export const DocumentTemplate: React.FC<DocumentTemplateProps> = ({ type, submis
             {submission.fullName}
           </p>
           <p className="text-[12pt] leading-tight">
-            {submission.institution}, « {submission.department} » {submission.position.toLowerCase()}i
+            {submission.institution}, « {submission.department} » "kafedrasi" {submission.position.toLowerCase()}i
           </p>
         </div>
       </div>
