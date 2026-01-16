@@ -134,7 +134,7 @@ export const DocumentTemplate: React.FC<DocumentTemplateProps> = ({ type, submis
             {submission.fullName}
           </p>
           <p className="text-[12pt] leading-tight">
-            {submission.institution}, « {submission.department} » "kafedrasi" {submission.position.toLowerCase()}i
+            {submission.institution}, « {submission.department} » kafedrasi {submission.position.toLowerCase()}i
           </p>
         </div>
       </div>
